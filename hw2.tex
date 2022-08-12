@@ -1,0 +1,174 @@
+\documentclass[12pt,letterpaper, onecolumn]{exam}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{nicefrac}
+\setcounter{MaxMatrixCols}{20}
+\usepackage[lmargin=71pt, tmargin=1.2in]{geometry}  %For centering solution box
+\lhead{Optimal Estimation}
+\rhead{Noah Miller}
+\thispagestyle{empty}   %For removing header/footer from page 1
+
+\begin{document}
+
+\begingroup
+\centering
+\LARGE Optimal Estimation\\
+\LARGE Homework 2 \\[0.5em]
+\large \today\\[0.5em]
+\large Noah Miller\par
+\large 903949330\par
+\large MECH 7710\par
+\endgroup
+\pointsdroppedatright   %Self-explanatory
+\printanswers
+\renewcommand{\solution}{\noindent\textbf{Ans:}\enspace}   %Replace "Ans:" with starting keyword in solution box
+
+
+
+\begin{questions}
+    \question{Two random variables $\mathbf{x}_1$ and $\mathbf{x}_2$ have a joint PDF that is uniform inside the circle (in the $\mathbf{x}_1-\mathbf{x}_2$ plane) with radius $2$, and zero outside the circle.}
+    \begin{parts}
+        \part{Find the math expression of the joint PDF function.}
+
+        \solution{}
+
+        \part{Find the conditional PDF $P_{x_2\vert x_1}(x_2\vert x_1 = 0.5)$?}
+
+        \solution{}
+
+        \part{Are the two random variables uncorrelated?}
+
+        \solution{}
+
+        \part{Are the two random variables statistically independent?
+
+            \textit{Hint: find} $p_{x_1}(x_1)$ and $p_{x_2}(x_2)$ and check if $p_{x_1x_2}(x_1,x_2) = p_{x_1}(x_1)p_{x_2}(x_2)$
+        }
+
+        \solution{}
+    \end{parts}
+    \clearpage
+    \question{The stationary process $\mathbf{x}(t)$ has an autocorrelation function of the form: \[R_x(\tau) = \sigma^2 e^{-\beta \vert \tau \vert} \]
+        Another process $\mathbf{y}(t)$ is related to $\mathbf{x}(t)$ by the deterministic equation: \[y(t) = ax(t) + b \] where the constants $\mathbf{a}$ and $\mathbf{b}$ are known.}
+    \begin{parts}
+        \part{What is the auto-correlation function for $\mathbf{y}(t)$}
+
+        \solution{}
+
+        \part{What is the cross-correlation function $R_{xy}(\tau) = E\left[x(t)y(t + \tau) \right]$?}
+
+        \solution{}
+    \end{parts}
+    \clearpage
+    \question{Use least squares to indentify a gyroscopes scale factor (a) and bias(b). Simulate the gyroscope using: \[g(k) = ar(k) + b + n(k) \] \[n \sim N\left(0,0.3 \left[\frac{deg}{s}\right]\right) \] \[r(k) = 100sin(\omega t) \]}
+    \begin{parts}
+        \part{Perform the least squares with 10 samples (make sure to pick $\omega$ so that you get one full cycle in 10 samples).}
+
+        \solution{}
+
+        \part{Repeat part (a) 1000 times and calculate the mean and standard deviation of the estimate errors (this is known as a Monte Carlo Simulation). Compare the results to the theoretically expected mean and standard deviation.}
+
+        \solution{}
+
+        \part{Repeat part (a) and (b) using 1000 samples. What does the theoretical and Monte Carlo standard deviation of the estimated errors approach?}
+
+        \solution{}
+
+        \part{Set up the problem to run as a recursive least squares and plot the coefficients and theoretical standard deviation of the estimate error and the actual estimate error as a function of time.}
+
+        \solution{}
+    \end{parts}
+    \clearpage
+    \question{\textbf{Least Squares for System (I.D.)}
+        Simulate the following discrete system a normal random input and output noise \[G(z) = \frac{0.25(z - 0.8)}{z^2 - 1.90z + 0.95} \]
+        The following sample MATLAB code to do this
+        \begin{equation}
+            \begin{split}
+                >> & numd  = 0.25\cdot[\:1 \quad -0.8\:]\\
+                >> & dend  = [\:1 \quad -1.9\quad 0.95 \:]\\
+                >> & u  = randn(1000,1)\\
+                >> & y  = dlsim(numd,dend,u)\\
+                >> & sigma  = 0.01\\
+                >> & Y = y + sigma\cdot randn(1000,1)\\
+            \end{split}
+        \end{equation}
+    }
+    \begin{parts}
+        \part{Develop the $\mathbf{H}$ matrix for the least squares solution.}
+
+        \solution{}
+
+        \part{Use the least squares to estimate the coefficients of the above Transfer Function.}
+        \begin{subparts}
+            \subpart{How good is the fit?}
+
+            \solution{}
+
+            \subpart{Plot the bode response of the I.D. TF and simulated TF on the same plot.}
+
+            \solution{}
+
+            \subpart{How much relative noise has been added (SNR - signal to noise ratio)}
+
+            \solution{}
+
+            \subpart{Plot $\mathbf{y}$ amd $\mathbf{Y}$ on the same plot}
+
+            \solution{}
+        \end{subparts}
+
+
+        \part{Repeat the estimation process about 10 times using new values for the new vector each time. Compute the mean and standard deviation of your parameter estimates. Compare the computed values of the parameter statistics with those predicted by the theory based on the known value of the noise statistics.}
+        \solution{}
+
+        \part{Now use the sigma between $0.1$ and $1.0$ and repeat parts (b) and (c)}
+
+        \solution{}
+
+        \part{What can you conclude about using least squares for sys id with large amounts of noise.}
+
+        \solution{}
+    \end{parts}
+    \clearpage
+    \question{Justification of white noise for certain problems. Consider two problems:}
+    \begin{itemize}
+        \item[i.]{Simple first order low-pass filter with bandlimited white noise as the input:
+        $y = G(s)\omega$, so that $S_y(j\omega) = \left\vert G(j\omega) \right\vert^2S_{\omega}(j\omega)$, and the noise has the PSD
+        \[S_1(\omega) =
+            \begin{Bmatrix}
+                A & \vert \omega \vert \leq \omega_c \\
+                0 & \vert \omega \vert > \omega_c    \\
+            \end{Bmatrix} \]
+        \[G(s) = \frac{1}{T_{\omega}s + 1} \]
+        }
+        \item[ii.]{The same low pass system, but with pure white noise as the input.
+                    \[S_2(\omega) = A\;\forall\;\omega   \]
+                    \[G(s) = \frac{1}{T_{\omega}s + 1} \]
+              }
+    \end{itemize}
+    The first case seems quite plausible, the second case has an input with infinite variance and so is not physically realizable. However, the white noise assumption simplifies the system analysis significantly, so it is important to see if the assumption is justified. We test this with our two examples above:
+    \begin{parts}
+        \part{Sketch the noise PSD and $\vert G(j\omega)\vert$ for a reasonable value of $T_\omega$ and $\omega)c$ to compare the two cases.}
+
+        \solution{}
+
+        \part{Determine the $S_y(j\omega)$ for the two cases. Sketch these too.}
+
+        \solution{}
+
+        \part{Determine $E[y^2]$ for the two cases.}
+
+        \solution{}
+
+        \part{Use these results to justify the following statement:
+            If the input spectrum is flat considerably beyond the system bandwidth, there is little error introduced by assuming that the input spectrum is flat out to infinity.
+        }
+
+        \solution{}
+
+    \end{parts}
+
+\end{questions}
+\end{document}
