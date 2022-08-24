@@ -32,22 +32,92 @@
     \begin{parts}
         \part{Find the math expression of the joint PDF function.}
 
-        \solution{}
+        \solution{
+            \begin{equation}
+                \begin{split}
+                    P_{x_1x_2} & =
+                    \begin{cases}
+                        \frac{1}{4\pi} & \text{if } \sqrt{x^2 + x_2^2} \leq 2 \\
+                        0              & \text{if } \sqrt{x^2 + x_2^2} > 2    \\
+                    \end{cases}
+                \end{split}
+            \end{equation}
+        }
 
         \part{Find the conditional PDF $P_{x_2\vert x_1}(x_2\vert x_1 = 0.5)$?}
 
-        \solution{}
+        \solution{
+            We can find the conditional PDF by expanding equation \ref{eq:2}.
+            \begin{equation}\label{eq:2}
+                \begin{split}
+                    P_{x_1 \vert x_2}(x_2\vert x_1 = 0.5) & = \frac{f_{x_1x_2}}{f_{x_1}}\\
+                \end{split}
+            \end{equation}
+            Given that $x_1 = 0.5$ and our initial bounds, we can expand the denominator to be the PDF of $x_1$ or
+            \begin{equation}
+                \begin{split}
+                    f_{x_1} & = \int^{-\sqrt{3.75}}_{-\sqrt{3.75}} \frac{1}{4\pi}dx_2\\
+                    & = \frac{\sqrt{3.75}}{2\pi}
+                \end{split}
+            \end{equation}
+            \begin{equation}
+                \begin{split}
+                    P_{x_1 \vert x_2}(x_2\vert x_1 = 0.5) & = \left(\frac{1}{4\pi}\right)\left(\frac{2\pi}{\sqrt{3.75}} \right)\\
+                    & = \frac{1}{2\sqrt{3.75}}\\
+                \end{split}
+            \end{equation}
+        }
 
         \part{Are the two random variables uncorrelated?}
 
-        \solution{}
+        \solution{
+            To find if the two random variables are uncorrelated, we start by calculating the covariance coefficient, $\rho_{12}$.
+            \begin{equation}
+                \begin{split}
+                    \rho_{12} & = \frac{E[x_1,x_2] - \overline{x_1}\,\overline{x_2}}{\sigma_1 \sigma_2}\\
+                \end{split}
+            \end{equation}
+            We can dissect this equation term by term to simplify it before solving.
+            \begin{equation}
+                \begin{split}
+                    E[x_1,x_2] & = \int\int f_{x_1x_2}(x_1x_2)dx_1 dx_2\\
+                    & = \int^{\sqrt{4-x_1^2}}_{-\sqrt{4-x_1^2}}\int^{\sqrt{4-x_2^2}}_{-\sqrt{4-x_2^2}} \frac{1}{4\pi}(x_1x_2)dx_1 dx_2\\
+                    & = 0\\
+                \end{split}
+            \end{equation}
+            Because the circle is centered about zero, we can assume the mean of $x_1$ and $x_2$ to be zero.
+            \begin{equation}
+                \begin{split}
+                    \overline{x_1} & = 0\\
+                    \overline{x_2} & = 0\\
+                \end{split}
+            \end{equation}
+            With the numerator of the covariance coefficient equally 0, we can effectively say that $\rho_{12} = 0$. Because of this the off-diagonal terms of the covariance matrix are 0, proving that the two random variables are uncorrelated.
+        }
 
         \part{Are the two random variables statistically independent?
 
             \textit{Hint: find} $p_{x_1}(x_1)$ and $p_{x_2}(x_2)$ and check if $p_{x_1x_2}(x_1,x_2) = p_{x_1}(x_1)p_{x_2}(x_2)$
         }
 
-        \solution{}
+        \solution{
+            No. The two random variables ($x_1$,$x_2$) are not statistically independent. We can prove this using the property from our notes: \[f_{x_1 x_2} = f_{x_1} f_{x_2} \]
+            Using our previous method from part \textbf{b} and substituting our integration limits from part \textbf{c} gives us:
+            \begin{equation}
+                \begin{split}
+                    f_{x_1} & = \int^{\sqrt{4-x^2_1}}_{-\sqrt{4-x^2_1}}\frac{1}{4\pi}dx_1\\
+                    & = \frac{x_2}{4\pi}\bigg\vert^{\sqrt{4-x^2_1}}_{-\sqrt{4-x^2_1}}\\
+                    & = \frac{\sqrt{4-x^2_1}}{4\pi} + \frac{\sqrt{4-x^2_1}}{4\pi}\\
+                    f_{x_1} & = \frac{\sqrt{4-x^2_1}}{2\pi} \\
+                \end{split}
+            \end{equation}
+            The PDF for $f_{x_2}$ is very similar, only differing by changing $x_1$ to $x_2$.
+            \begin{equation}
+                \begin{split}
+                    f_{x_2} & = \frac{\sqrt{4-x^2_2}}{2\pi} \\
+                \end{split}
+            \end{equation}
+        }
     \end{parts}
     \clearpage
     \question{The stationary process $\mathbf{x}(t)$ has an autocorrelation function of the form: \[R_x(\tau) = \sigma^2 e^{-\beta \vert \tau \vert} \]
