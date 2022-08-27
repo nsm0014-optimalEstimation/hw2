@@ -125,7 +125,18 @@
     \begin{parts}
         \part{What is the auto-correlation function for $\mathbf{y}(t)$}
 
-        \solution{}
+        \solution{We know the general form of the auto-correlation function to be
+            \[R(t,\;t + \tau) = E\left[y(t)y(t + \tau)\right], \]
+            and by substituting our given function of $y(t)$, we find our general form to reflect:
+            \begin{equation}
+                \begin{split}
+                    R(t,\;t+\tau) & = E\left[(ax(t) + b)(ax(t + \tau) + b)\right]\\
+                    & = E\left[(a^2x(t)x(t + \tau) + bax(t + \tau) + bax(t) + b^2)\right]\\
+                    & = E\left[(a^2x(t)x(t + \tau) + bax(t + \tau) + bax(t) + b^2)\right]\\
+                    & = a^2 E\left[x(t)x(t + \tau)\right] + baE\left[x(t + \tau)\right] + baE\left[x(t)\right] + E\left[b^2\right]\\
+                    & = a^2 \sigma^2 e^{-\beta \vert \tau \vert} + 2ba\overline{x}\\
+                \end{split}
+            \end{equation}}
 
         \part{What is the cross-correlation function $R_{xy}(\tau) = E\left[x(t)y(t + \tau) \right]$?}
 
