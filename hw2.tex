@@ -140,7 +140,16 @@
 
         \part{What is the cross-correlation function $R_{xy}(\tau) = E\left[x(t)y(t + \tau) \right]$?}
 
-        \solution{}
+        \solution{Similiar to how we started part a, we substitute our given function for $y(t)$ and solve.
+            \begin{equation}
+                \begin{split}
+                    R_{xy}(\tau) & = E\left[x(t)y(t + \tau) \right]\\
+                    & = E\left[x(t)\left(ax(t + \tau) + b\right)\right]\\
+                    & = E\left[x(t)ax(t + \tau) + bx(t)\right]\\
+                    & = aE\left[x(t)x(t + \tau)\right] + bE\left[x(t)\right]\\
+                    & = a \sigma^2 e^{-\beta \vert \tau \vert} + b \overline{x}\\
+                \end{split}
+            \end{equation}}
     \end{parts}
     \clearpage
     \question{Use least squares to indentify a gyroscopes scale factor (a) and bias(b). Simulate the gyroscope using: \[g(k) = ar(k) + b + n(k) \] \[n \sim N\left(0,0.3 \left[\frac{deg}{s}\right]\right) \] \[r(k) = 100sin(\omega t) \]}
