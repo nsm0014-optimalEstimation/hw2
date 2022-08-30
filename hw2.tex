@@ -152,12 +152,32 @@
             \end{equation}}
     \end{parts}
     \clearpage
-    \question{Use least squares to indentify a gyroscopes scale factor (a) and bias(b). Simulate the gyroscope using: \[g(k) = ar(k) + b + n(k) \] \[n \sim N\left(0,0.3 \left[\frac{deg}{s}\right]\right) \] \[r(k) = 100sin(\omega t) \]}
+    \question{Use least squares to indentify a gyroscopes scale factor (a) and bias(b). Simulate the gyroscope using: \[g(k) = ar(k) + b + n(k) \] \[n \sim N\left(0,0.3 \left[\frac{rads}{s}\right]\right) \] \[r(t) = 100sin(\omega t) \]}
     \begin{parts}
         \part{Perform the least squares with 10 samples (make sure to pick $\omega$ so that you get one full cycle in 10 samples).}
 
-        \solution{}
+        \solution{
+            To make sure my least squares process is correct, displayed below are figures of the noise (figure \ref{fig:1}), the true rotation (figure \ref{fig:2}) and the gyroscope measurement with the added scale factor and bias (figure \ref{fig:3}).
 
+            \begin{figure}[!h]
+                \label{fig:1}
+                \centering
+                \includegraphics[width=\linewidth]{Q3a_n.png}
+            \end{figure}
+
+            \begin{figure}[!h]
+                \label{fig:2}
+                \centering
+                \includegraphics[width=\linewidth]{Q3a_r.png}
+            \end{figure}
+
+            \begin{figure}[!h]
+                \label{fig:3}
+                \centering
+                \includegraphics[width=\linewidth]{Q3a_g.png}
+            \end{figure}
+        }
+        \clearpage
         \part{Repeat part (a) 1000 times and calculate the mean and standard deviation of the estimate errors (this is known as a Monte Carlo Simulation). Compare the results to the theoretically expected mean and standard deviation.}
 
         \solution{}
