@@ -10,7 +10,7 @@ omega = pi/0.25;
 meanq3 = 0;
 sigma = 0.3;
 t = linspace(0,100,1001);
-samples = 10;
+samples = 1000;
 r = 100*sin(omega*t);
 R = sigma^2*eye(samples);
 for k = 1:1000
@@ -38,21 +38,21 @@ ylabel('noise','FontSize',16)
 hold on
 plot(t,gaussianDistVector,LineWidth=1);
 xlim([0 10])
-saveas(fig2,'Q3a_n.png')
+saveas(fig2,'Q3c_n.png')
 
 fig3 = figure('Position',[500 500 800 400]);
 xlabel('samples','FontSize',16)
 ylabel('value','FontSize',16)
 hold on
 plot(1:samples,g,LineWidth=1);
-saveas(fig3,'Q3a_g.png')
+saveas(fig3,'Q3c_g.png')
 
 fig3 = figure('Position',[500 500 800 400]);
 xlabel('samples','FontSize',16)
 ylabel('value','FontSize',16)
 hold on
 plot(1:samples,g,LineWidth=1);
-saveas(fig3,'Q3a_g.png')
+saveas(fig3,'Q3c_g.png')
 
 fig4 = figure('Position',[500 500 800 400]);
 tiledlayout(2,1)
@@ -64,7 +64,7 @@ scatter(1:1000,LSQ_esti(1,:));
 yline(a,LineWidth=2,Color=[0 0 0])
 yline(std(LSQ_esti(1,:)) + a,LineWidth=2,Color=[1 0 0])
 yline(-std(LSQ_esti(1,:)) + a,LineWidth=2,Color=[1 0 0])
-ylim([4.995 5.005])
+ylim([4.9995 5.0005])
 
 
 nexttile
@@ -75,8 +75,8 @@ scatter(1:1000,LSQ_esti(2,:));
 yline(b,LineWidth=2,Color=[0 0 0])
 yline(std(LSQ_esti(2,:)) + b,LineWidth=2,Color=[1 0 0])
 yline(-std(LSQ_esti(2,:)) + b,LineWidth=2,Color=[1 0 0])
-ylim([.2 .8])
-saveas(fig4,'Q3a_1000.png')
+ylim([.45 .55])
+saveas(fig4,'Q3c_10000.png')
 
 mean(LSQ_esti(1,:))
 mean(LSQ_esti(2,:))

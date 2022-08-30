@@ -157,40 +157,60 @@
         \part{Perform the least squares with 10 samples (make sure to pick $\omega$ so that you get one full cycle in 10 samples).}
 
         \solution{
-            To make sure my least squares process is correct, displayed below are figures of the noise (figure \ref{fig:1}), the true rotation (figure \ref{fig:2}) and the gyroscope measurement with the added scale factor and bias (figure \ref{fig:3}).
+            To make sure my least squares process is correct, displayed below are figures of the noise (figure 1), the true rotation (figure 2) and the gyroscope measurement with the added scale factor and bias (figure 3). Setting my $a$ and $b$  to $5$ and $0.5$, repectively, produced an estimated value of those parameters as $4.9967$ and $0.6872$.
 
             \begin{figure}[!h]
-                \label{fig:1}
                 \centering
-                \includegraphics[width=\linewidth]{Q3a_n.png}
+                \includegraphics[width=.5\linewidth]{Q3a_n.png}
+                \label{fig:1}
             \end{figure}
 
             \begin{figure}[!h]
                 \label{fig:2}
                 \centering
-                \includegraphics[width=\linewidth]{Q3a_r.png}
+                \includegraphics[width=.5\linewidth]{Q3a_r.png}
             \end{figure}
 
             \begin{figure}[!h]
                 \label{fig:3}
                 \centering
-                \includegraphics[width=\linewidth]{Q3a_g.png}
+                \includegraphics[width=.5\linewidth]{Q3a_g.png}
             \end{figure}
         }
         \clearpage
         \part{Repeat part (a) 1000 times and calculate the mean and standard deviation of the estimate errors (this is known as a Monte Carlo Simulation). Compare the results to the theoretically expected mean and standard deviation.}
 
-        \solution{}
-
+        \solution{
+            Running the same 10 samples over 1000 times produced the following results (figure \ref{fig:4}). Through the 1000-run monte-carlo simulation, we get a mean of $4.999$ for a value of $a$ and a mean of $0.4983$ for $b$. This pretty close to our expected mean $5$ and $0.5$.
+            Furthermore, we get a standard deviation of $0.0013304$ for a value of $a$ and a standard deviation of $0.093126$ for $b$. This pretty close to our expected standard deviation $0.0018$ and $0.09$.
+            \begin{figure}[!h]
+                \label{fig:4}
+                \centering
+                \includegraphics[width=\linewidth]{Q3a_1000.png}
+            \end{figure}
+        }
+        \clearpage
         \part{Repeat part (a) and (b) using 1000 samples. What does the theoretical and Monte Carlo standard deviation of the estimated errors approach?}
 
-        \solution{}
+        \solution{
+            Doing 1000 samples per simulation allows to approach the expected mean and standard deviation more closely than doing 10 samples per simulation.
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=\linewidth]{Q3c_10000.png}
+            \end{figure}
+        }
 
         \part{Set up the problem to run as a recursive least squares and plot the coefficients and theoretical standard deviation of the estimate error and the actual estimate error as a function of time.}
 
-        \solution{}
+        \solution{
+            Using recursive least squares gives an accurate estimation of the coefficients, seen in the figure below. The mean and standard deviation values for the recursive least squares method deviates a tiny bit at the beginning, but is spot on to the exact values as time progresses.
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=0.75\linewidth]{Q3d.png}
+            \end{figure}
+        }
+        \clearpage
     \end{parts}
-    \clearpage
     \question{\textbf{Least Squares for System (I.D.)}
         Simulate the following discrete system a normal random input and output noise \[G(z) = \frac{0.25(z - 0.8)}{z^2 - 1.90z + 0.95} \]
         The following sample MATLAB code to do this
