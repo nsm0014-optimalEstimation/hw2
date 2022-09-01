@@ -160,32 +160,35 @@
 
             \begin{figure}[!h]
                 \centering
-                \includegraphics[width=.5\linewidth]{Q3a_n.png}
+                \includegraphics[width=.65\linewidth]{Q3a_n.png}
+                \caption{10 samples of simulated noise being added to the system.}
                 \label{fig:1}
             \end{figure}
 
             \begin{figure}[!h]
-                \label{fig:2}
                 \centering
-                \includegraphics[width=.5\linewidth]{Q3a_r.png}
+                \includegraphics[width=.65\linewidth]{Q3a_r.png}
+                \caption{10 samples of system rotation with \underline{no} noise added.}
+                \label{fig:2}
             \end{figure}
 
             \begin{figure}[!h]
-                \label{fig:3}
                 \centering
-                \includegraphics[width=.5\linewidth]{Q3a_g.png}
+                \includegraphics[width=.7\linewidth]{Q3a_g.png}
+                \caption{Simulated raw measurements from gyroscope.}
+                \label{fig:3}
             \end{figure}
         }
-        \clearpage
         \part{Repeat part (a) 1000 times and calculate the mean and standard deviation of the estimate errors (this is known as a Monte Carlo Simulation). Compare the results to the theoretically expected mean and standard deviation.}
 
         \solution{
             Running the same 10 samples over 1000 times produced the following results (figure \ref{fig:4}). Through the 1000-run monte-carlo simulation, we get a mean of $4.999$ for a value of $a$ and a mean of $0.4983$ for $b$. This pretty close to our expected mean $5$ and $0.5$.
             Furthermore, we get a standard deviation of $0.0013304$ for a value of $a$ and a standard deviation of $0.093126$ for $b$. This pretty close to our expected standard deviation $0.0018$ and $0.09$.
             \begin{figure}[!h]
-                \label{fig:4}
                 \centering
                 \includegraphics[width=\linewidth]{Q3a_1000.png}
+                \caption{1000-run Monte-Carlo simulation using least squares.}
+                \label{fig:4}
             \end{figure}
         }
         \clearpage
@@ -206,6 +209,8 @@
             \begin{figure}[!h]
                 \centering
                 \includegraphics[width=0.75\linewidth]{Q3d.png}
+                \caption{Coefficient estimation using recursive least squares.}
+                \label{fig:5}
             \end{figure}
         }
         \clearpage
@@ -339,31 +344,126 @@
                     \end{bmatrix}
                 \end{equation}
             }
-
+            \clearpage
             \subpart{Plot the bode response of the I.D. TF and simulated TF on the same plot.}
 
-            \solution{}
-
+            \solution{%
+                \begin{figure}[!h]
+                    \centering
+                    \includegraphics[width=\linewidth]{bode_4b.png}
+                    \caption{Bode comparison of estimated and true states from Equation \eqref{eq:15}}
+                    \label{fig:6}
+                \end{figure}
+            }
+            \clearpage
             \subpart{How much relative noise has been added (SNR - signal to noise ratio)}
 
-            \solution{}
+            \solution{%
+                Finding the standard deviation of the output and comparing it to the standard deviation of the generated noise will give us a signal to noise ratio. This can be done in MATLAB simply as:
+                \begin{equation*}
+                    \begin{split}
+                        >> & stdY = std(Y)\\
+                        >> & snr = stdY/sigma\\
+                        >> & snr = 109.53\\
+                    \end{split}
+                \end{equation*}
+            }
 
             \subpart{Plot $\mathbf{y}$ amd $\mathbf{Y}$ on the same plot}
 
-            \solution{}
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=\linewidth]{output_4b.png}
+                \caption{Comparison of observer and true states}
+                \label{fig:7}
+            \end{figure}
         \end{subparts}
 
-
+        \clearpage
         \part{Repeat the estimation process about 10 times using new values for the new vector each time. Compute the mean and standard deviation of your parameter estimates. Compare the computed values of the parameter statistics with those predicted by the theory based on the known value of the noise statistics.}
-        \solution{}
 
+        \solution{%
+            Running the simulation 10 times with new noise each time allows to take the expectation of our parameters and find the standard deviation of them over 10 runs.
+            \begin{equation}
+                \begin{split}
+                    \overline{x_0} & = 0.2465 \\
+                    \overline{x_1} & = -0.1571 \\
+                    \overline{x_2} & = 0.4956 \\
+                    \overline{x_3} & = -0.3025 \\
+                \end{split}
+                \label{eq:19}
+            \end{equation}
+            \begin{equation}
+                \begin{split}
+                    \sigma_{x_0} & = 0.0235\\
+                    \sigma_{x_1} & = 0.0223\\
+                    \sigma_{x_2} & = 0.0366\\
+                    \sigma_{x_3} & = 0.0218\\
+                \end{split}
+                \label{eq:20}
+            \end{equation}
+            Comparing these values to our true parameters and standard deviations we can see that parameters are decently accurate but the standard deviations are not. This is probably due to only running 10 simulations. Running more simulations would lead to a more accurate standard deviation characterization.
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{|c|c|c|c|}
+                    \hline
+                    Parameter  & Estimated Value & Theoretical Value & Percent Error (\%) \\
+                    \hline
+                    $x_0$      & $0.2465$        & $0.25$            & $1.04$             \\
+                    $x_1$      & $-0.1571$       & $0.2$             & $172.04$           \\
+                    $x_2$      & $0.4956$        & $1.9$             & $72.81$            \\
+                    $x_3$      & $-0.3025$       & $0.95$            & $130.54$           \\
+                    \hline
+                    $\sigma_0$ & $0.0235$        & $9\times10^{-6}$  & $2.432\times10^5$  \\
+                    $\sigma_1$ & $0.0223$        & $2\times10^{-5}$  & $9.1586\times10^5$ \\
+                    $\sigma_2$ & $0.0366$        & $3\times10^{-4}$  & $7.8579\times10^4$ \\
+                    $\sigma_3$ & $0.0218$        & $3\times10^{-4}$  & $6.4201\times10^4$ \\
+                    \hline
+                \end{tabular}
+            \end{table}
+        }
+        \clearpage
         \part{Now use the sigma between $0.1$ and $1.0$ and repeat parts (b) and (c)}
 
-        \solution{}
+        \solution{%
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=0.75\linewidth]{bode_4d.png}
+                \caption{Bode comparison of estimated and true states from Equation \eqref{eq:15}}
+                \label{fig:8}
+            \end{figure}
 
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=0.75\linewidth]{output_4d.png}
+                \caption{Comparison of observer and true states}
+                \label{fig:9}
+            \end{figure}
+            \clearpage
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{|c|c|c|c|}
+                    \hline
+                    Parameter  & Estimated Value & Theoretical Value & Percent Error (\%) \\
+                    \hline
+                    $x_0$      & $0.2427$        & $0.25$            & $2.90$             \\
+                    $x_1$      & $-0.1562$       & $0.2$             & $178.09$           \\
+                    $x_2$      & $0.5002$        & $1.9$             & $73.68$            \\
+                    $x_3$      & $-0.2992$       & $0.95$            & $131.49$           \\
+                    \hline
+                    $\sigma_0$ & $0.0212$        & $9\times10^{-6}$  & $2.356\times10^5$  \\
+                    $\sigma_1$ & $0.022$         & $2\times10^{-5}$  & $9.1586\times10^5$ \\
+                    $\sigma_2$ & $0.0523$        & $3\times10^{-4}$  & $1.734\times10^4$  \\
+                    $\sigma_3$ & $0.0338$        & $3\times10^{-4}$  & $1.12\times10^4$   \\
+                    \hline
+                \end{tabular}
+            \end{table}
+        }
         \part{What can you conclude about using least squares for sys id with large amounts of noise.}
 
-        \solution{}
+        \solution{%
+            Using least squares alone to estimate system states is not a viable option. With a hefty amount of noise, the estimation falls apart and calculates the states including the noise instead of trying to filter it out.
+        }
     \end{parts}
     \clearpage
     \question{Justification of white noise for certain problems. Consider two problems:}
