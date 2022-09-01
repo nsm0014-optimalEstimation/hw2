@@ -269,11 +269,10 @@
                 \begin{split}
                     \mathbf{x} & =
                     \begin{bmatrix}
-                        x_0    \\
-                        x_1    \\
-                        x_2    \\
-                        \vdots \\
-                        x_n    \\
+                        x_1 \\
+                        x_2 \\
+                        x_3 \\
+                        x_4 \\
                     \end{bmatrix}
                 \end{split}
                 \label{eq:16}
@@ -284,7 +283,62 @@
         \begin{subparts}
             \subpart{How good is the fit?}
 
-            \solution{}
+            \solution{%
+                We can setup least squres for the system simmiliarly to problem 3.
+                \begin{equation}
+                    \begin{split}
+                        \mathbf{x}& = \left(\mathbf{H}^T\mathbf{H}\right)^{-1}\mathbf{H}^T \mathbf{Y}\\
+                        \begin{bmatrix}
+                            x_1 \\
+                            x_2 \\
+                            x_3 \\
+                            x_4 \\
+                        \end{bmatrix} & = \left(
+                        \begin{bmatrix}
+                            u_{n-1} & u_{n-2} & y_{n-1} & y_{n-2} \\
+                            u_{0}   & u_{n-1} & y_{0}   & y_{n-1} \\
+                            u_{1}   & u_{0}   & y_{1}   & y_{0}   \\
+                            \vdots  & \vdots  & \vdots  & \vdots  \\
+                            u_{n-1} & u_{n-2} & y_{n-1} & y_{n-2} \\
+                        \end{bmatrix}^T
+                        \begin{bmatrix}
+                            u_{n-1} & u_{n-2} & y_{n-1} & y_{n-2} \\
+                            u_{0}   & u_{n-1} & y_{0}   & y_{n-1} \\
+                            u_{1}   & u_{0}   & y_{1}   & y_{0}   \\
+                            \vdots  & \vdots  & \vdots  & \vdots  \\
+                            u_{n-1} & u_{n-2} & y_{n-1} & y_{n-2} \\
+                        \end{bmatrix}\right)^{-1}\\
+                        \cdot &\begin{bmatrix}
+                            u_{n-1} & u_{n-2} & y_{n-1} & y_{n-2} \\
+                            u_{0}   & u_{n-1} & y_{0}   & y_{n-1} \\
+                            u_{1}   & u_{0}   & y_{1}   & y_{0}   \\
+                            \vdots  & \vdots  & \vdots  & \vdots  \\
+                            u_{n-1} & u_{n-2} & y_{n-1} & y_{n-2} \\
+                        \end{bmatrix}^T \begin{bmatrix}
+                            y_0    \\
+                            y_1    \\
+                            y_2    \\
+                            \vdots \\
+                            y_n    \\
+                        \end{bmatrix}\\
+                    \end{split}
+                    \label{}
+                \end{equation}
+                \begin{equation}
+                    \begin{bmatrix}
+                        x_1 \\
+                        x_2 \\
+                        x_3 \\
+                        x_4 \\
+                    \end{bmatrix}  =
+                    \begin{bmatrix}
+                        0.24948 \\
+                        0.19818 \\
+                        1.8931  \\
+                        0.94336 \\
+                    \end{bmatrix}
+                \end{equation}
+            }
 
             \subpart{Plot the bode response of the I.D. TF and simulated TF on the same plot.}
 
