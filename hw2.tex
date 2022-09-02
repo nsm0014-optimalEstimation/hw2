@@ -501,13 +501,45 @@
         \part{Determine the $S_y(j\omega)$ for the two cases. Sketch these too.}
 
         \solution{%
-
+            Evaluating the PSD's for each case shows that they are both similiar in the fact that they slope down at $\frac{1}{T_{\omega}}$. With the first case, after $\vert \omega \vert > \omega_c$, it goes to 0, this is not what happens for the second case where the amplitude exists for all frequencies.
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=0.75\linewidth]{Untitled Page 2022-09-02 21_25_14.png}
+                \caption{PSD images for both cases}
+                \label{Fig:11}
+            \end{figure}
         }
-
+        \clearpage
         \part{Determine $E[y^2]$ for the two cases.}
 
         \solution{%
-Because the white noise has a zero mean distribution. 
+        Because the white noise has a zero mean distribution. we can assume
+        \[E\left[y^2\right] = \int_{-\infty}^{\infty}S_y(j\omega)d\omega. \]
+        substituting in our first case gives us
+        \begin{equation}
+            \begin{split}
+                E\left[y^2\right] & = \int_{-\omega_c}^{\omega_c}\frac{A}{T_{\omega}^2 \omega^2 + 1}d\omega\\
+                & = AT_{\omega}^2\int_{-\omega_c}^{\omega_c}\frac{1}{\omega^2 + T_{\omega}^{-2}}d\omega\\
+                AT_{\omega}^2\int_{-\omega_c}^{\omega_c}\frac{1}{\omega^2 + T_{\omega}^{-2}}d\omega & = a^{-1}tan^{-1}\left(\frac{u}{a}\right)\\
+                E\left[y^2\right] & = AT_{\omega}^2\int_{-\omega_c}^{\omega_c}T_{\omega}tan^{-1}\left(T_{\omega} \omega\right)d\omega\\
+            \end{split}
+            \label{eq:21}
+        \end{equation}
+        Using MATLAB's symbolic toolbox, we can evaluate the integral in Equation \ref{eq:21} to get
+        \[E\left[y^2\right] = \frac{2A}{T_{\omega}}tan^{-1}\left(T_{\omega} \omega_c\right) \]
+        To solve the second case, we do the exact same process, except this time, our integration limits are $\left[-\infty,\infty\right]$.
+        \begin{equation}
+            \begin{split}
+                E\left[y^2\right] & = \int_{-\infty}^{\infty}\frac{A}{T_{\omega}^2 \omega^2 + 1}d\omega\\
+                & = AT_{\omega}^2\int_{-\infty}^{\infty}\frac{1}{\omega^2 + T_{\omega}^{-2}}d\omega\\
+                AT_{\omega}^2\int_{-\infty}^{\infty}\frac{1}{\omega^2 + T_{\omega}^{-2}}d\omega & = a^{-1}tan^{-1}\left(\frac{u}{a}\right)\\
+                E\left[y^2\right] & = AT_{\omega}^2\int_{-\infty}^{\infty}T_{\omega}tan^{-1}\left(T_{\omega} \omega\right)d\omega\\
+            \end{split}
+            \label{eq:22}
+        \end{equation}
+        The arctangent function evaluated to infinity equates to $\frac{\pi}{2}$ or $90^o$. This simplifies our case 2 function to:
+        \[E\left[y^2\right] = \frac{A}{T_\omega}\left(\frac{\pi}{2} - \left(\frac{-\pi}{2}\right) \right)\]
+        Simplifying case 2 even further gives a final reduction of the variance to: \[E\left[y^2\right] = \frac{A}{T_{\omega}}\pi \]
         }
 
         \part{Use these results to justify the following statement:
